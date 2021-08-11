@@ -85,7 +85,7 @@ volumes:
     name:
     mountPath: /data
     size: 10Gi
-    class: hostpath
+    class: nfs-client
     accessModes:
       - ReadWriteOnce
   internal:
@@ -116,5 +116,5 @@ resources:
     cpu: 1
     memory: 1000Mi
  requests:
-    cpu: 500m
-    memory: 500Mi
+    cpu: 300m
+    memory: 300Mi

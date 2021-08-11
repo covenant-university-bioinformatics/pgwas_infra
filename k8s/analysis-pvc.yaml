@@ -4,7 +4,7 @@ metadata:
   name: analysis-storage
   namespace: apps
 spec:
-  storageClassName: hostpath
+  storageClassName: nfs-client
   accessModes:
     - ReadWriteMany
   resources:

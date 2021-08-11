@@ -40,8 +40,8 @@ spec:
     - metadata:
         name: pgwas-mongo-persistent-storage
       spec:
-        storageClassName: hostpath
+        storageClassName: nfs-client
         accessModes: ["ReadWriteOnce"]
         resources:
           requests:
-            storage: 5Gi
+            storage: 50Gi
