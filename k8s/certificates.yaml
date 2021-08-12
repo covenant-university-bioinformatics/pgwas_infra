@@ -11,10 +11,3 @@ spec:
   dnsNames:
     - spgwas.waslitbre.org
     - www.spgwas.waslitbre.org
-  acme:
-    config:
-      - http01:
-          ingressClass: nginx
-        domains:
-          - spgwas.waslitbre.org
-          - www.spgwas.waslitbre.org
