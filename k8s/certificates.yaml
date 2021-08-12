@@ -1,0 +1,20 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: spgwas-waslitbre-org-tls
+spec:
+  secretName: spgwas-waslitbre-org
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: spgwas.waslitbre.org
+  dnsNames:
+    - spgwas.waslitbre.org
+    - www.spgwas.waslitbre.org
+  acme:
+    config:
+      - http01:
+          ingressClass: nginx
+        domains:
+          - spgwas.waslitbre.org
+          - www.spgwas.waslitbre.org
