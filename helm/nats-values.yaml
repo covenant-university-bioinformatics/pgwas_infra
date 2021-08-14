@@ -57,6 +57,18 @@ args:
   - "-SD"
   - "-cid"
   - "pgwas-internal"
+  - "-store"
+  - "file"
+  - "-dir"
+  - "/db/datastore"
+  - "-mc"
+  - "0"
+  - "-msu"
+  - "0"
+  - "-mm"
+  - "0"
+  - "-mb"
+  - "0"
 
 
 # List of services
@@ -79,14 +91,14 @@ eventConfigMap: true
 redisConfigMap: false
 
 volumes:
-  enabled: false
+  enabled: true
   pvc:
-    enabled: false
+    enabled: true
     existing_claim:
     name: pvc
-    mountPath: /pv
-    size: 1G
-    class:
+    mountPath: /db/datastore
+    size: 5G
+    class: nfs-client
     accessModes:
       - ReadWriteOnce
 
@@ -108,7 +120,7 @@ ingress:
 resources:
   limits:
     cpu: 1
-    memory: 1000Mi
+    memory: 2000Mi
   requests:
-    cpu: 300m
-    memory: 300Mi
+    cpu: 400m
+    memory: 2000Mi
