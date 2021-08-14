@@ -101,6 +101,12 @@ volumes:
     class: nfs-client
     accessModes:
       - ReadWriteOnce
+  internal:
+    enabled: false
+    hostpath:
+      - name:
+        path:
+        mountPath: /local/datasets
 
   configMaps:
 #    - name: test
