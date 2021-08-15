@@ -5,7 +5,10 @@ on:
     branches:
       - main
     paths:
-      - '**'
+      - '.github/**'
+      - 'helm/**'
+      - 'k8s/**'
+
 jobs:
   build:
     runs-on: ubuntu-latest
