@@ -22,4 +22,4 @@ jobs:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
       - run: doctl kubernetes cluster kubeconfig save k8s-1-21-2-do-2-fra-pgwas
       - run: kubectl apply -f ./k8s/servestatic.yaml
-      - run: kubectl rollout restart deployment servestatic-deployment
+      - run: kubectl rollout restart deployment servestatic-deployment -n apps
