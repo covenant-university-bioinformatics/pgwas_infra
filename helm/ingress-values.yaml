@@ -114,7 +114,7 @@ ingress:
       paths:
         - path: /api/annot/?(.*)
           pathType: Prefix
-          serviceName: annot-service-deployment-svc-web
+          serviceName: annot-deployment-svc-web
           servicePort: 3000
         - path: /api/users/?(.*)
           pathType: Prefix
@@ -132,7 +132,7 @@ ingress:
       paths:
         - path: /api/annot/?(.*)
           pathType: Prefix
-          serviceName: annot-service-deployment-svc-web
+          serviceName: annot-deployment-svc-web
           servicePort: 3000
         - path: /api/users/?(.*)
           pathType: Prefix
@@ -159,9 +159,9 @@ ingress:
 ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
 ##
 resources:
-  limits:
-    cpu: 1
-    memory: 1000Mi
-  requests:
-    cpu: 1000m
-    memory: 1000Mi
+#  limits:
+#    cpu: 1
+#    memory: 1000Mi
+#  requests:
+#    cpu: 1000m
+#    memory: 1000Mi
