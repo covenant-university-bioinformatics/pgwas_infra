@@ -124,6 +124,10 @@ ingress:
           pathType: Prefix
           serviceName: auth-deployment-svc-web
           servicePort: 3000
+        - path: /results/?(.*)
+          pathType: Prefix
+          serviceName: servestatic-deployment-svc-web
+          servicePort: 3000
         - path: /?(.*)
           pathType: Prefix
           serviceName: pgwasfrontendapp-deployment-svc-web
@@ -141,6 +145,10 @@ ingress:
         - path: /api/auth/?(.*)
           pathType: Prefix
           serviceName: auth-deployment-svc-web
+          servicePort: 3000
+        - path: /results/?(.*)
+          pathType: Prefix
+          serviceName: servestatic-deployment-svc-web
           servicePort: 3000
         - path: /?(.*)
           pathType: Prefix

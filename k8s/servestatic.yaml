@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: servestatic-deployment
+  namespace: apps
+  labels:
+    app.kubernetes.io/name: servestatic-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: servestatic-depl
+      app.kubernetes.io/instance: servestatic
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: servestatic-depl
+        app.kubernetes.io/instance: servestatic
+    spec:
+      containers:
+        - name: servestatic
+          image: cubrenig/pgwasservestatic
+          imagePullPolicy: Always
+          ports:
+            - name: port-svc
+              containerPort: 3000
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /pv/analysis
+              name: analysis-storage-volume
+          resources:
+            limits:
+              cpu: 300m
+              memory: 400Mi
+            requests:
+              cpu: 300m
+              memory: 400Mi
+      volumes:
+        - name: analysis-storage-volume
+          persistentVolumeClaim:
+            claimName: analysis-storage
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: servestatic-deployment-svc-web
+  namespace: apps
+  labels:
+    app.kubernetes.io/name: servestatic-deployment-svc-web
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: servestatic-depl
+    app.kubernetes.io/instance: servestatic
+  ports:
+    - name: port-svc
+      port: 3000
+      protocol: TCP
+      targetPort: 3000
