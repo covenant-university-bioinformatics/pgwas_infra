@@ -20,13 +20,13 @@ spec:
       containers:
         - name: mongo
           image: mongo
-          resources:
-            limits:
-              cpu: "1"
-              memory: 1500Mi
-            requests:
-              cpu: 1000m
-              memory: 1500Mi
+#          resources:
+#            limits:
+#              cpu: "1"
+#              memory: 1500Mi
+#            requests:
+#              cpu: 1000m
+#              memory: 1500Mi
           command:
             - mongod
             - "--bind_ip"
