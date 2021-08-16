@@ -2,7 +2,7 @@ import express from "express";
 
 const app = express();
 
-app.use('/results', express.static('/pv/analysis'));
+app.use('/results/pv/analysis', express.static('/pv/analysis', {index: false}));
 
 app.listen(3000, () => {
     console.log("Serve Static");
