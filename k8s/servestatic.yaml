@@ -25,6 +25,34 @@ spec:
             - name: port-svc
               containerPort: 3000
               protocol: TCP
+          env:
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
+            - name: MONGO_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: pgwasmongo-configmap
+                  key: database_url
+            - name: MONGODB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: mongo-root-username
+            - name: MONGODB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: mongo-root-password
+            - name: MONGODB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: mongo-auth-db
+            - name: MONGODB_PODNAME
+              value: pgwas-mongo
           volumeMounts:
             - mountPath: /pv/analysis
               name: analysis-storage-volume

@@ -116,6 +116,10 @@ ingress:
           pathType: Prefix
           serviceName: annot-deployment-svc-web
           servicePort: 3000
+        - path: /api/liftover/?(.*)
+          pathType: Prefix
+          serviceName: liftover-deployment-svc-web
+          servicePort: 3000
         - path: /api/users/?(.*)
           pathType: Prefix
           serviceName: auth-deployment-svc-web
@@ -137,6 +141,10 @@ ingress:
         - path: /api/annot/?(.*)
           pathType: Prefix
           serviceName: annot-deployment-svc-web
+          servicePort: 3000
+        - path: /api/liftover/?(.*)
+          pathType: Prefix
+          serviceName: liftover-deployment-svc-web
           servicePort: 3000
         - path: /api/users/?(.*)
           pathType: Prefix
