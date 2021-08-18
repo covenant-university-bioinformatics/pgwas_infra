@@ -9,7 +9,8 @@ const runApp = () => {
 
     app.use(cookieParser());
 
-    app.use('/results/pv/analysis', authMiddleware, express.static('/pv/analysis', {index: false}));
+    // app.use('/results/pv/analysis', authMiddleware, express.static('/pv/analysis', {index: false}));
+    app.use('/results/pv/analysis', express.static('/pv/analysis', {index: false}));
 
     app.use(errorHandler);
 
