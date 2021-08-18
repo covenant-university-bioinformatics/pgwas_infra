@@ -33,6 +33,8 @@ spec:
             - "0.0.0.0"
             - "--replSet"
             - "rs0"
+            - "--setParameter"
+            - "maxTransactionLockRequestTimeoutMillis=5000"
           ports:
             - containerPort: 27017
           volumeMounts:
