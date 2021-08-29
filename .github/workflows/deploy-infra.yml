@@ -20,5 +20,5 @@ jobs:
       - run: doctl kubernetes cluster kubeconfig save k8s-1-21-2-do-2-fra-pgwas
       - run: kubectl apply -f ./k8s
       - run: helm upgrade ingress ./helm --install --wait --atomic --values=./helm/ingress-values.yaml
-      - run: helm upgrade redis-bullmq ./helm --install --wait --atomic --values=./helm/redis-values.yaml --set volumes.pvc.name=bullmq
+      - run: helm upgrade redis-bullmq ./helm --install --wait --values=./helm/redis-values.yaml --set volumes.pvc.name=bullmq
       - run: helm upgrade nats ./helm --install --wait --atomic --values=./helm/nats-values.yaml
