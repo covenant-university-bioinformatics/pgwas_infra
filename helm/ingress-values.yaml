@@ -116,6 +116,14 @@ ingress:
           pathType: Prefix
           serviceName: annot-deployment-svc-web
           servicePort: 3000
+        - path: /api/delet/?(.*)
+          pathType: Prefix
+          serviceName: annot-deployment-svc-web
+          servicePort: 3000
+        - path: /api/ldstructure/?(.*)
+          pathType: Prefix
+          serviceName: ldstructure-deployment-svc-web
+          servicePort: 3000
         - path: /api/liftover/?(.*)
           pathType: Prefix
           serviceName: liftover-deployment-svc-web
@@ -142,9 +150,17 @@ ingress:
           pathType: Prefix
           serviceName: annot-deployment-svc-web
           servicePort: 3000
+        - path: /api/delet/?(.*)
+          pathType: Prefix
+          serviceName: annot-deployment-svc-web
+          servicePort: 3000
         - path: /api/liftover/?(.*)
           pathType: Prefix
           serviceName: liftover-deployment-svc-web
+          servicePort: 3000
+        - path: /api/ldstructure/?(.*)
+          pathType: Prefix
+          serviceName: ldstructure-deployment-svc-web
           servicePort: 3000
         - path: /api/users/?(.*)
           pathType: Prefix
