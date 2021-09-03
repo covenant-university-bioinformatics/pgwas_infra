@@ -1,0 +1,87 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: servestatic-deployment
+  namespace: apps
+  labels:
+    app.kubernetes.io/name: servestatic-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: servestatic-depl
+      app.kubernetes.io/instance: servestatic
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: servestatic-depl
+        app.kubernetes.io/instance: servestatic
+    spec:
+      containers:
+        - name: servestatic
+          image: cubrenig/pgwasservestatic
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: port-svc
+              containerPort: 3000
+              protocol: TCP
+          env:
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
+            - name: MONGO_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: pgwasmongo-configmap
+                  key: database_url
+            - name: MONGODB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: mongo-root-username
+            - name: MONGODB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: mongo-root-password
+            - name: MONGODB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: mongo-auth-db
+            - name: MONGODB_PODNAME
+              value: pgwas-mongo
+          volumeMounts:
+            - mountPath: /pv/analysis
+              name: analysis-storage-volume
+          resources:
+            limits:
+              cpu: 300m
+              memory: 400Mi
+            requests:
+              cpu: 300m
+              memory: 400Mi
+      volumes:
+        - name: analysis-storage-volume
+          persistentVolumeClaim:
+            claimName: analysis-storage
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: servestatic-deployment-svc-web
+  namespace: apps
+  labels:
+    app.kubernetes.io/name: servestatic-deployment-svc-web
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: servestatic-depl
+    app.kubernetes.io/instance: servestatic
+  ports:
+    - name: port-svc
+      port: 3000
+      protocol: TCP
+      targetPort: 3000
