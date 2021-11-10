@@ -13,17 +13,26 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: appleboy/ssh-action@master
+      - name: git checkout
+        uses: actions/checkout@v2
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
+      - name: Adding Known Hosts
+        run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+      - name: Copy files with rsync
+        run: rsync -avzn ${{ github.workspace }} ${{ secrets.USERNAME }}@${{ secrets.SSH_HOST }}:/home/gwas/files/dist/
+      - name: run script commands via ssh
+        uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           script: |
             whoami
-            ls -al ${{ github.workspace }}
-            whoami
-            ls -al $GITHUB_WORKSPACE
+            ls -al /home/gwas/files/dist/
       #- run: kubectl apply -f ./k8s
       #- run: helm upgrade ingress ./helm --install --wait --atomic --values=./helm/ingress-values.yaml
       #- run: helm upgrade redis-bullmq ./helm --install --wait --values=./helm/redis-values.yaml --set volumes.pvc.name=bullmq
