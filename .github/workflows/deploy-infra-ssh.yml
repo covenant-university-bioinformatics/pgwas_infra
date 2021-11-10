@@ -20,8 +20,10 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           script: |
-            whoami
-            ls -al
+            kubectl apply -f ./k8s
+            helm upgrade ingress ./helm --install --wait --atomic --values=./helm/ingress-values.yaml
+            helm upgrade redis-bullmq ./helm --install --wait --values=./helm/redis-values.yaml --set volumes.pvc.name=bullmq
+            helm upgrade nats ./helm --install --wait --atomic --values=./helm/nats-values.yaml
       #- run: kubectl apply -f ./k8s
       #- run: helm upgrade ingress ./helm --install --wait --atomic --values=./helm/ingress-values.yaml
       #- run: helm upgrade redis-bullmq ./helm --install --wait --values=./helm/redis-values.yaml --set volumes.pvc.name=bullmq
