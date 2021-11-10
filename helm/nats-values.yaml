@@ -95,9 +95,9 @@ volumes:
   pvc:
     enabled: true
     existing_claim:
-    name: pvc
+    name: nats-pvc
     mountPath: /db/datastore
-    size: 5G
+    size: 20Gi
     class: nfs-client
     accessModes:
       - ReadWriteOnce
