@@ -36,6 +36,7 @@ jobs:
             helm upgrade ingress ${{ secrets.HOME_DIR }}/files/dist/infra/helm --install --wait --atomic --values=${{ secrets.HOME_DIR }}/files/dist/infra/helm/ingress-values.yaml
             helm upgrade redis-bullmq ${{ secrets.HOME_DIR }}/files/dist/infra/helm --install --wait --values=${{ secrets.HOME_DIR }}/files/dist/infra/helm/redis-values.yaml --set volumes.pvc.name=bullmq
             helm upgrade nats ${{ secrets.HOME_DIR }}/files/dist/infra/helm --install --wait --atomic --values=${{ secrets.HOME_DIR }}/files/dist/infra/helm/nats-values.yaml
+            rm -rf ${{ secrets.HOME_DIR }}/files/dist/infra
       #- run: kubectl apply -f ./k8s
       #- run: helm upgrade ingress ./helm --install --wait --atomic --values=./helm/ingress-values.yaml
       #- run: helm upgrade redis-bullmq ./helm --install --wait --values=./helm/redis-values.yaml --set volumes.pvc.name=bullmq

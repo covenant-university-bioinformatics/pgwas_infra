@@ -50,8 +50,8 @@ spec:
       volumes:
       - name: nfspgwas-volume
         nfs:
-          path: /mnt/volume_fra1_03
-          server: 207.154.231.244
+          path: /mnt/cubrestore/gwas
+          server: 192.168.10.3
   volumeClaimTemplates:
     - metadata:
         name: pgwas-mongo-persistent-storage
@@ -60,4 +60,4 @@ spec:
         accessModes: ["ReadWriteOnce"]
         resources:
           requests:
-            storage: 50Gi
+            storage: 100Gi
