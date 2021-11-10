@@ -40,11 +40,18 @@ spec:
           volumeMounts:
             - name: pgwas-mongo-persistent-storage
               mountPath: /data/db
+            - mountPath: /local/datasets
+              name: nfspgwas-volume
         - name: mongo-sidecar
           image: cvallance/mongo-k8s-sidecar
           env:
             - name: MONGO_SIDECAR_POD_LABELS
               value: "role=mongo-db-pgwas,environment=pgwas-mongo"
+      volumes:
+      - name: nfspgwas-volume
+        nfs:
+          path: /mnt/volume_fra1_03
+          server: 207.154.231.244
   volumeClaimTemplates:
     - metadata:
         name: pgwas-mongo-persistent-storage
