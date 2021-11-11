@@ -20,7 +20,7 @@ spec:
       containers:
         - name: servestatic
           image: cubrenig/pgwasservestatic
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           ports:
             - name: port-svc
               containerPort: 3000

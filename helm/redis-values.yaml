@@ -80,9 +80,9 @@ redisConfigMap: false
 volumes:
   enabled: true
   pvc:
-    enabled: true
-    existing_claim:
-    name: bullmq
+    enabled: false
+    existing_claim: bullmq
+    name: #add name here for fresh start
     mountPath: /data
     size: 30Gi
     class: nfs-client
@@ -94,6 +94,13 @@ volumes:
       - name:
         path:
         mountPath: /local/datasets
+  network:
+    enabled: true
+    nfs:
+      - name: nfspgwas
+        server: 192.168.10.3
+        path: /mnt/cubrestore/gwas/data
+        mountPath: /data
 
 #  configMaps:
 #    - name: test

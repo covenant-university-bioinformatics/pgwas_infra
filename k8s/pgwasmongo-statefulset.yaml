@@ -19,7 +19,7 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
         - name: mongodb-container
-          image: mongo
+          image: mongo:4.4.6
 #          resources:
 #            limits:
 #              cpu: "1"
@@ -27,14 +27,14 @@ spec:
 #            requests:
 #              cpu: 1000m
 #              memory: 1500Mi
-#          command:
-#            - "mongod"
-#            - "--bind_ip"
-#            - "0.0.0.0"
-#            - "--replSet"
-#            - "rs0"
-#            - "--setParameter"
-#            - "maxTransactionLockRequestTimeoutMillis=5000"
+          command:
+            - "mongod"
+            - "--bind_ip"
+            - "0.0.0.0"
+            - "--replSet"
+            - "rs0"
+            - "--setParameter"
+            - "maxTransactionLockRequestTimeoutMillis=5000"
           ports:
             - containerPort: 27017
           volumeMounts:
