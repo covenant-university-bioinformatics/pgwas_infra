@@ -82,7 +82,7 @@ volumes:
   pvc:
     enabled: true
     existing_claim:
-    name: redis-pvc
+    name: bullmq
     mountPath: /data
     size: 30Gi
     class: nfs-client

@@ -27,14 +27,14 @@ spec:
 #            requests:
 #              cpu: 1000m
 #              memory: 1500Mi
-          command:
-            - "mongod"
-            - "--bind_ip"
-            - "0.0.0.0"
-            - "--replSet"
-            - "rs0"
-            - "--setParameter"
-            - "maxTransactionLockRequestTimeoutMillis=5000"
+#          command:
+#            - "mongod"
+#            - "--bind_ip"
+#            - "0.0.0.0"
+#            - "--replSet"
+#            - "rs0"
+#            - "--setParameter"
+#            - "maxTransactionLockRequestTimeoutMillis=5000"
           ports:
             - containerPort: 27017
           volumeMounts:
@@ -42,11 +42,11 @@ spec:
               mountPath: /data/db
             - mountPath: /local/datasets
               name: nfspgwas-volume
-        - name: mongo-sidecar
-          image: cvallance/mongo-k8s-sidecar
-          env:
-            - name: MONGO_SIDECAR_POD_LABELS
-              value: "role=mongo-db-pgwas,environment=pgwas-mongo"
+#        - name: mongo-sidecar
+#          image: cvallance/mongo-k8s-sidecar
+#          env:
+#            - name: MONGO_SIDECAR_POD_LABELS
+#              value: "role=mongo-db-pgwas,environment=pgwas-mongo"
       volumes:
       - name: nfspgwas-volume
         nfs:
@@ -57,7 +57,7 @@ spec:
         name: pgwas-mongo-persistent-storage
       spec:
         storageClassName: nfs-client
-        accessModes: ["ReadWriteOnce"]
+        accessModes: [ "ReadWriteOnce" ]
         resources:
           requests:
             storage: 100Gi
