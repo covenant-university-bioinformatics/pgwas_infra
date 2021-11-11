@@ -89,13 +89,13 @@ volumes:
     accessModes:
       - ReadWriteOnce
   internal:
-    enabled: false
-    hostpath:
-      - name:
-        path:
-        mountPath: /local/datasets
-  network:
     enabled: true
+    hostpath:
+      - name: hostpath
+        path: /home/gwas/redis/data
+        mountPath: /data
+  network:
+    enabled: false
     nfs:
       - name: nfspgwas
         server: 192.168.10.3
