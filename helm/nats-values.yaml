@@ -107,7 +107,13 @@ volumes:
       - name:
         path:
         mountPath: /local/datasets
-
+  network:
+    enabled: false
+    nfs:
+      - name: nfspgwas
+        server: 207.154.231.244
+        path: /mnt/volume_fra1_03/data
+        mountPath: /data
   configMaps:
 #    - name: test
 #      mountPath: /test

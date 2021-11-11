@@ -87,12 +87,25 @@ volumes:
   pvc:
     enabled: false
     existing_claim:
-    name: pvc
-    mountPath: /pv
-    size: 1G
+    name:
+    mountPath:
+    size:
     class:
     accessModes:
       - ReadWriteOnce
+  internal:
+    enabled: false
+    hostpath:
+      - name:
+        path:
+        mountPath: /local/datasets
+  network:
+    enabled: false
+    nfs:
+      - name: nfspgwas
+        server: 192.168.10.3
+        path: /mnt/volume_fra1_03/data
+        mountPath: /data
 
   configMaps:
 
