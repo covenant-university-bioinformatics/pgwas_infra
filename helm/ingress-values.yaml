@@ -123,7 +123,7 @@ ingress:
     # kubernetes.io/ingress.class: nginx
   # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: test.waslitbre.org
+    - host: spgwas.waslitbre.org
       paths:
         - path: /api/annot/?(.*)
           pathType: Prefix
@@ -157,7 +157,7 @@ ingress:
           pathType: Prefix
           serviceName: pgwasfrontendapp-deployment-svc-web
           servicePort: 3000
-    - host: www.test.waslitbre.org
+    - host: www.spgwas.waslitbre.org
       paths:
         - path: /api/annot/?(.*)
           pathType: Prefix
