@@ -117,8 +117,8 @@ ingress:
     kubernetes.io/ingress.class: nginx,
     nginx.ingress.kubernetes.io/use-regex: 'true',
     nginx.ingress.kubernetes.io/proxy-body-size: 200m,
-#    cert-manager.io/cluster-issuer: "letsencrypt-prod",
-#    nginx.ingress.kubernetes.io/ssl-redirect: "true" #force every traffic to use https connection
+    cert-manager.io/cluster-issuer: "letsencrypt-prod",
+    nginx.ingress.kubernetes.io/ssl-redirect: "true" #force every traffic to use https connection
   }
     # kubernetes.io/ingress.class: nginx
   # kubernetes.io/tls-acme: "true"
@@ -199,11 +199,13 @@ ingress:
           pathType: Prefix
           serviceName: pgwasfrontendapp-deployment-svc-web
           servicePort: 3000
-#  tls:
-#    - hosts:
-#        - spgwas.waslitbre.org
-#        - www.spgwas.waslitbre.org
-#      secretName: spgwas-waslitbre-org
+  tls:
+    - hosts:
+        - spgwas.waslitbre.org
+        - www.spgwas.waslitbre.org
+      secretName: spgwas-waslitbre-org
+
+
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
