@@ -1,0 +1,230 @@
+---
+# Default values for microservice.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+global:
+  replicaCount: 1
+  environment:
+  # list of key: value
+  # GLOBAL1: value
+
+## Set default image, imageTag, and imagePullPolicy.
+## ref: https://hub.docker.com/r/apache/nifi/
+##
+
+
+image: skdcfg
+imageConfig:
+  repository:
+  tag: "latest"
+  pullPolicy: IfNotPresent
+
+#command: ['echo pre-install Job Pod is Running']
+
+replicaCount: 1
+
+# command: ["/bin/sh","-c"]
+# args: ["echo 'consuming a message'; sleep 5"]
+
+nameOverride: service
+fullnameOverride: ""
+namespace: apps
+## Optionally specify an imagePullSecret.
+## Secret must be manually created in the namespace.
+## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+##
+#imagePullSecrets: myRegistrKeySecretName
+#imagePullSecrets: ""
+
+# serviceAccount:
+
+# Annotation for the Deployment
+annotations: {}
+
+#ARGS: 
+
+args:
+
+
+# List of services
+services:
+#  - name: web
+#    type: ClusterIP
+#    annotations: {}
+#    specs:
+#      - port: 4222
+#        targetPort: 4222
+#        name: client
+#      - port: 8222
+#        targetPort: 8222
+#        name: monitoring
+#  - name: nodeport
+#    type: NodePort
+#    annotations: { }
+#    specs:
+#      - port: 3000
+#        targetPort: 3000
+#        name: testing
+#targetPort: is the port the container accepts traffic on,
+#port: is the abstracted Service port, which can be any port other pods use to access the Service
+#https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.16/#serviceport-v1-core
+
+environment:
+#  - name: JWT_KEY
+#    valueFrom:
+#      secretKeyRef:
+#        name: jwt-secret
+#        key: JWT_KEY
+
+
+dbConfigMap: false
+eventConfigMap: false
+redisConfigMap: false
+
+volumes:
+  enabled: false
+  pvc:
+    enabled: false
+    existing_claim:
+    name:
+    mountPath:
+    size:
+    class:
+    accessModes:
+      - ReadWriteOnce
+  internal:
+    enabled: false
+    hostpath:
+      - name:
+        path:
+        mountPath: /local/datasets
+  network:
+    enabled: false
+    nfs:
+      - name: nfspgwas
+        server: 192.168.10.3
+        path: /mnt/volume_fra1_03/data
+        mountPath: /data
+
+  configMaps:
+
+## Configure Ingress based on the documentation here: https://kubernetes.io/docs/concepts/services-networking/ingress/
+##
+ingress:
+  enabled: true
+  annotations: {
+    kubernetes.io/ingress.class: nginx,
+    nginx.ingress.kubernetes.io/use-regex: 'true',
+    nginx.ingress.kubernetes.io/proxy-body-size: 300m,
+#    cert-manager.io/cluster-issuer: "letsencrypt-prod",
+#    nginx.ingress.kubernetes.io/ssl-redirect: "true" #force every traffic to use https connection
+  }
+    # kubernetes.io/ingress.class: nginx
+  # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: pgwas.dev
+      paths:
+        - path: /api/annot/?(.*)
+          pathType: Prefix
+          serviceName: annot-deployment-svc-web
+          servicePort: 3000
+        - path: /api/delet/?(.*)
+          pathType: Prefix
+          serviceName: annot-deployment-svc-web
+          servicePort: 3000
+        - path: /api/genebased/?(.*)
+          pathType: Prefix
+          serviceName: genebased-deployment-svc-web
+          servicePort: 3000
+        - path: /api/pathwaybased/?(.*)
+          pathType: Prefix
+          serviceName: pathwaybased-deployment-svc-web
+          servicePort: 3000
+        - path: /api/ldstructure/?(.*)
+          pathType: Prefix
+          serviceName: ldstructure-deployment-svc-web
+          servicePort: 3000
+        - path: /api/liftover/?(.*)
+          pathType: Prefix
+          serviceName: liftover-deployment-svc-web
+          servicePort: 3000
+        - path: /api/users/?(.*)
+          pathType: Prefix
+          serviceName: auth-deployment-svc-web
+          servicePort: 3000
+        - path: /api/auth/?(.*)
+          pathType: Prefix
+          serviceName: auth-deployment-svc-web
+          servicePort: 3000
+        - path: /results/?(.*)
+          pathType: Prefix
+          serviceName: servestatic-deployment-svc-web
+          servicePort: 3000
+        - path: /?(.*)
+          pathType: Prefix
+          serviceName: pgwasfrontendapp-deployment-svc-web
+          servicePort: 3000
+    - host: www.pgwas.dev
+      paths:
+        - path: /api/annot/?(.*)
+          pathType: Prefix
+          serviceName: annot-deployment-svc-web
+          servicePort: 3000
+        - path: /api/delet/?(.*)
+          pathType: Prefix
+          serviceName: annot-deployment-svc-web
+          servicePort: 3000
+        - path: /api/genebased/?(.*)
+          pathType: Prefix
+          serviceName: genebased-deployment-svc-web
+          servicePort: 3000
+        - path: /api/pathwaybased/?(.*)
+          pathType: Prefix
+          serviceName: pathwaybased-deployment-svc-web
+          servicePort: 3000
+        - path: /api/liftover/?(.*)
+          pathType: Prefix
+          serviceName: liftover-deployment-svc-web
+          servicePort: 3000
+        - path: /api/ldstructure/?(.*)
+          pathType: Prefix
+          serviceName: ldstructure-deployment-svc-web
+          servicePort: 3000
+        - path: /api/users/?(.*)
+          pathType: Prefix
+          serviceName: auth-deployment-svc-web
+          servicePort: 3000
+        - path: /api/auth/?(.*)
+          pathType: Prefix
+          serviceName: auth-deployment-svc-web
+          servicePort: 3000
+        - path: /results/?(.*)
+          pathType: Prefix
+          serviceName: servestatic-deployment-svc-web
+          servicePort: 3000
+        - path: /?(.*)
+          pathType: Prefix
+          serviceName: pgwasfrontendapp-deployment-svc-web
+          servicePort: 3000
+#  tls:
+#    - hosts:
+#        - spgwas.waslitbre.org
+#        - www.spgwas.waslitbre.org
+#      secretName: spgwas-waslitbre-org
+
+
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+## Configure resource requests and limits
+## ref: http://kubernetes.io/docs/user-guide/compute-resources/
+##
+resources:
+#  limits:
+#    cpu: 1
+#    memory: 1000Mi
+#  requests:
+#    cpu: 1000m
+#    memory: 1000Mi
