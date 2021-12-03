@@ -137,6 +137,10 @@ ingress:
           pathType: Prefix
           serviceName: genebased-deployment-svc-web
           servicePort: 3000
+        - path: /api/pathwaybased/?(.*)
+          pathType: Prefix
+          serviceName: pathwaybased-deployment-svc-web
+          servicePort: 3000
         - path: /api/ldstructure/?(.*)
           pathType: Prefix
           serviceName: ldstructure-deployment-svc-web
@@ -174,6 +178,10 @@ ingress:
         - path: /api/genebased/?(.*)
           pathType: Prefix
           serviceName: genebased-deployment-svc-web
+          servicePort: 3000
+        - path: /api/pathwaybased/?(.*)
+          pathType: Prefix
+          serviceName: pathwaybased-deployment-svc-web
           servicePort: 3000
         - path: /api/liftover/?(.*)
           pathType: Prefix
