@@ -141,6 +141,14 @@ ingress:
           pathType: Prefix
           serviceName: pathwaybased-deployment-svc-web
           servicePort: 3000
+        - path: /api/eqtl/?(.*)
+          pathType: Prefix
+          serviceName: eqtl-deployment-svc-web
+          servicePort: 3000
+        - path: /api/eqtlplot/?(.*)
+          pathType: Prefix
+          serviceName: eqtl-deployment-svc-web
+          servicePort: 3000
         - path: /api/ldstructure/?(.*)
           pathType: Prefix
           serviceName: ldstructure-deployment-svc-web
@@ -182,6 +190,14 @@ ingress:
         - path: /api/pathwaybased/?(.*)
           pathType: Prefix
           serviceName: pathwaybased-deployment-svc-web
+          servicePort: 3000
+        - path: /api/eqtl/?(.*)
+          pathType: Prefix
+          serviceName: eqtl-deployment-svc-web
+          servicePort: 3000
+        - path: /api/eqtlplot/?(.*)
+          pathType: Prefix
+          serviceName: eqtl-deployment-svc-web
           servicePort: 3000
         - path: /api/liftover/?(.*)
           pathType: Prefix
