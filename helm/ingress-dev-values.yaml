@@ -153,6 +153,10 @@ ingress:
           pathType: Prefix
           serviceName: ldstructure-deployment-svc-web
           servicePort: 3000
+        - path: /api/haplor/?(.*)
+          pathType: Prefix
+          serviceName: regulationhaplor-deployment-svc-web
+          servicePort: 3000
         - path: /api/liftover/?(.*)
           pathType: Prefix
           serviceName: liftover-deployment-svc-web
@@ -206,6 +210,10 @@ ingress:
         - path: /api/ldstructure/?(.*)
           pathType: Prefix
           serviceName: ldstructure-deployment-svc-web
+          servicePort: 3000
+        - path: /api/haplor/?(.*)
+          pathType: Prefix
+          serviceName: regulationhaplor-deployment-svc-web
           servicePort: 3000
         - path: /api/users/?(.*)
           pathType: Prefix
