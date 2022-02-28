@@ -17,7 +17,7 @@ image: redis
 imageConfig:
   repository:
   tag: "latest"
-  pullPolicy: IfNotPresent #change to Always for production
+  pullPolicy: IfNotPresent
 
 #command: ['echo pre-install Job Pod is Running']
 
@@ -80,20 +80,20 @@ redisConfigMap: false
 volumes:
   enabled: true
   pvc:
-    enabled: false
-    existing_claim: bullmq
-    name: #add name here for fresh start
+    enabled: true
+    existing_claim:
+    name: bullmq
     mountPath: /data
-    size: 30Gi
-    class: nfs-client
+    size: 10Gi
+    class: hostpath
     accessModes:
       - ReadWriteOnce
   internal:
-    enabled: true
+    enabled: false
     hostpath:
-      - name: hostpath
-        path: /home/gwas/redis/data
-        mountPath: /data
+      - name:
+        path:
+        mountPath: /local/datasets
   network:
     enabled: false
     nfs:
@@ -101,7 +101,6 @@ volumes:
         server: 192.168.10.3
         path: /mnt/cubrestore/gwas/data
         mountPath: /data
-
 #  configMaps:
 #    - name: test
 #      mountPath: /test
