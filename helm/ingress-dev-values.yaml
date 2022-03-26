@@ -141,6 +141,10 @@ ingress:
           pathType: Prefix
           serviceName: pathwaybased-deployment-svc-web
           servicePort: 3000
+        - path: /api/zscore/?(.*)
+          pathType: Prefix
+          serviceName: zscore-deployment-svc-web
+          servicePort: 3000
         - path: /api/eqtl/?(.*)
           pathType: Prefix
           serviceName: eqtl-deployment-svc-web
@@ -160,6 +164,10 @@ ingress:
         - path: /api/haplor/?(.*)
           pathType: Prefix
           serviceName: regulationhaplor-deployment-svc-web
+          servicePort: 3000
+        - path: /api/imputation/?(.*)
+          pathType: Prefix
+          serviceName: imputation-deployment-svc-web
           servicePort: 3000
         - path: /api/liftover/?(.*)
           pathType: Prefix
@@ -199,6 +207,10 @@ ingress:
           pathType: Prefix
           serviceName: pathwaybased-deployment-svc-web
           servicePort: 3000
+        - path: /api/zscore/?(.*)
+          pathType: Prefix
+          serviceName: zscore-deployment-svc-web
+          servicePort: 3000
         - path: /api/eqtl/?(.*)
           pathType: Prefix
           serviceName: eqtl-deployment-svc-web
@@ -222,6 +234,10 @@ ingress:
         - path: /api/haplor/?(.*)
           pathType: Prefix
           serviceName: regulationhaplor-deployment-svc-web
+          servicePort: 3000
+        - path: /api/imputation/?(.*)
+          pathType: Prefix
+          serviceName: imputation-deployment-svc-web
           servicePort: 3000
         - path: /api/users/?(.*)
           pathType: Prefix
