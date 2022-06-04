@@ -1,0 +1,138 @@
+---
+# Default values for microservice.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+global:
+  replicaCount: 1
+  environment:
+  # list of key: value
+  # GLOBAL1: value
+
+## Set default image, imageTag, and imagePullPolicy.
+## ref: https://hub.docker.com/r/apache/nifi/
+##
+
+image: nats-streaming:0.17.0
+imageConfig:
+  repository:
+  tag: "latest"
+  pullPolicy: IfNotPresent
+
+
+#command: ['echo pre-install Job Pod is Running']
+
+replicaCount: 1
+
+# command: ["/bin/sh","-c"]
+# args: ["echo 'consuming a message'; sleep 5"]
+
+nameOverride: event-broker
+fullnameOverride: ""
+namespace: apps
+## Optionally specify an imagePullSecret.
+## Secret must be manually created in the namespace.
+## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+##
+#imagePullSecrets: myRegistrKeySecretName
+#imagePullSecrets: ""
+
+# serviceAccount:
+
+# Annotation for the Deployment
+annotations: {}
+
+#ARGS: both works
+args:
+  - "-p"
+  - "4222"
+  - "-m"
+  - "8222"
+  - "-hbi"
+  - "5s"
+  - "-hbt"
+  - "5s"
+  - "-hbf"
+  - "2"
+  - "-SD"
+  - "-cid"
+  - "pgwas-internal"
+  - "-store"
+  - "file"
+  - "-dir"
+  - "/db/datastore"
+  - "-mc"
+  - "0"
+  - "-msu"
+  - "0"
+  - "-mm"
+  - "0"
+  - "-mb"
+  - "0"
+
+
+# List of services
+services:
+  - name: web
+    type: ClusterIP
+    annotations: {}
+    specs:
+      - port: 4222
+        targetPort: 4222
+        name: client
+      - port: 8222
+        targetPort: 8222
+        name: monitoring
+
+environment:
+
+dbConfigMap: false
+eventConfigMap: true
+redisConfigMap: false
+
+volumes:
+  enabled: true
+  pvc:
+    enabled: true
+    existing_claim:
+    name: nats-pvc
+    mountPath: /db/datastore
+    size: 20Gi
+    class: hostpath
+    accessModes:
+      - ReadWriteOnce
+  internal:
+    enabled: false
+    hostpath:
+      - name:
+        path:
+        mountPath: /local/datasets
+  network:
+    enabled: false
+    nfs:
+      - name: nfspgwas
+        server: 207.154.231.244
+        path: /mnt/volume_fra1_03/data
+        mountPath: /data
+  configMaps:
+#    - name: test
+#      mountPath: /test
+#      data:
+#        test.conf: |
+#          hello
+
+## Configure Ingress based on the documentation here: https://kubernetes.io/docs/concepts/services-networking/ingress/
+##
+ingress:
+  enabled: false
+
+## Configure resource requests and limits
+## ref: http://kubernetes.io/docs/user-guide/compute-resources/
+##
+resources:
+#  limits:
+#    cpu: 500m
+#    memory: 1000Mi
+#  requests:
+#    cpu: 500m
+#    memory: 1000Mi

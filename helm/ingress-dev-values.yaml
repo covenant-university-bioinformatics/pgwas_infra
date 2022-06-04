@@ -129,6 +129,14 @@ ingress:
           pathType: Prefix
           serviceName: annot-deployment-svc-web
           servicePort: 3000
+        - path: /api/bayes/?(.*)
+          pathType: Prefix
+          serviceName: bayesfinemap-deployment-svc-web
+          servicePort: 3000
+        - path: /api/spgwas/?(.*)
+          pathType: Prefix
+          serviceName: spgwascustom-deployment-svc-web
+          servicePort: 3000
         - path: /api/delet/?(.*)
           pathType: Prefix
           serviceName: annot-deployment-svc-web
@@ -194,6 +202,14 @@ ingress:
         - path: /api/annot/?(.*)
           pathType: Prefix
           serviceName: annot-deployment-svc-web
+          servicePort: 3000
+        - path: /api/bayes/?(.*)
+          pathType: Prefix
+          serviceName: bayesfinemap-deployment-svc-web
+          servicePort: 3000
+        - path: /api/spgwas/?(.*)
+          pathType: Prefix
+          serviceName: spgwascustom-deployment-svc-web
           servicePort: 3000
         - path: /api/delet/?(.*)
           pathType: Prefix
