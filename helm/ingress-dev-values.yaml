@@ -181,6 +181,10 @@ ingress:
           pathType: Prefix
           serviceName: liftover-deployment-svc-web
           servicePort: 3000
+        - path: /api/focus/?(.*)
+          pathType: Prefix
+          serviceName: focusfmap-deployment-svc-web
+          servicePort: 3000
         - path: /api/users/?(.*)
           pathType: Prefix
           serviceName: auth-deployment-svc-web
@@ -206,6 +210,10 @@ ingress:
         - path: /api/bayes/?(.*)
           pathType: Prefix
           serviceName: bayesfinemap-deployment-svc-web
+          servicePort: 3000
+        - path: /api/focus/?(.*)
+          pathType: Prefix
+          serviceName: focusfmap-deployment-svc-web
           servicePort: 3000
         - path: /api/spgwas/?(.*)
           pathType: Prefix

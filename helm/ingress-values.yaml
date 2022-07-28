@@ -133,6 +133,10 @@ ingress:
           pathType: Prefix
           serviceName: bayesfinemap-deployment-svc-web
           servicePort: 3000
+        - path: /api/focus/?(.*)
+          pathType: Prefix
+          serviceName: focusfmap-deployment-svc-web
+          servicePort: 3000
         - path: /api/delet/?(.*)
           pathType: Prefix
           serviceName: annot-deployment-svc-web
@@ -206,6 +210,10 @@ ingress:
         - path: /api/bayes/?(.*)
           pathType: Prefix
           serviceName: bayesfinemap-deployment-svc-web
+          servicePort: 3000
+        - path: /api/focus/?(.*)
+          pathType: Prefix
+          serviceName: focusfmap-deployment-svc-web
           servicePort: 3000
         - path: /api/spgwas/?(.*)
           pathType: Prefix
