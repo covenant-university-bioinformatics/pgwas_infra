@@ -141,6 +141,14 @@ ingress:
           pathType: Prefix
           serviceName: annot-deployment-svc-web
           servicePort: 3000
+        - path: /api/divan/?(.*)
+          pathType: Prefix
+          serviceName: divan-deployment-svc-web
+          servicePort: 3000
+        - path: /api/loci2path/?(.*)
+          pathType: Prefix
+          serviceName: loci2path-deployment-svc-web
+          servicePort: 3000
         - path: /api/genebased/?(.*)
           pathType: Prefix
           serviceName: genebased-deployment-svc-web
@@ -185,6 +193,10 @@ ingress:
           pathType: Prefix
           serviceName: focusfmap-deployment-svc-web
           servicePort: 3000
+        - path: /api/filterannot/?(.*)
+          pathType: Prefix
+          serviceName: filterannot-deployment-svc-web
+          servicePort: 3000
         - path: /api/users/?(.*)
           pathType: Prefix
           serviceName: auth-deployment-svc-web
@@ -211,9 +223,21 @@ ingress:
           pathType: Prefix
           serviceName: bayesfinemap-deployment-svc-web
           servicePort: 3000
+        - path: /api/divan/?(.*)
+          pathType: Prefix
+          serviceName: divan-deployment-svc-web
+          servicePort: 3000
+        - path: /api/loci2path/?(.*)
+          pathType: Prefix
+          serviceName: loci2path-deployment-svc-web
+          servicePort: 3000
         - path: /api/focus/?(.*)
           pathType: Prefix
           serviceName: focusfmap-deployment-svc-web
+          servicePort: 3000
+        - path: /api/filterannot/?(.*)
+          pathType: Prefix
+          serviceName: filterannot-deployment-svc-web
           servicePort: 3000
         - path: /api/spgwas/?(.*)
           pathType: Prefix
