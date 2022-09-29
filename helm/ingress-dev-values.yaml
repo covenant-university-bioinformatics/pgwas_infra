@@ -149,6 +149,14 @@ ingress:
           pathType: Prefix
           serviceName: loci2path-deployment-svc-web
           servicePort: 3000
+        - path: /api/ensemblvep/?(.*)
+          pathType: Prefix
+          serviceName: ensemblvep-deployment-svc-web
+          servicePort: 3000
+        - path: /api/tseadb/?(.*)
+          pathType: Prefix
+          serviceName: tseadb-deployment-svc-web
+          servicePort: 3000
         - path: /api/genebased/?(.*)
           pathType: Prefix
           serviceName: genebased-deployment-svc-web
@@ -230,6 +238,14 @@ ingress:
         - path: /api/loci2path/?(.*)
           pathType: Prefix
           serviceName: loci2path-deployment-svc-web
+          servicePort: 3000
+        - path: /api/ensemblvep/?(.*)
+          pathType: Prefix
+          serviceName: ensemblvep-deployment-svc-web
+          servicePort: 3000
+        - path: /api/tseadb/?(.*)
+          pathType: Prefix
+          serviceName: tseadb-deployment-svc-web
           servicePort: 3000
         - path: /api/focus/?(.*)
           pathType: Prefix
