@@ -80,22 +80,22 @@ redisConfigMap: false
 volumes:
   enabled: true
   pvc:
-    enabled: false
-    existing_claim: bullmq
-    name: #add name here for fresh start
+    enabled: true
+    existing_claim:
+    name: bullmq #add name here for fresh start
     mountPath: /data
-    size: 30Gi
+    size: 50Gi
     class: nfs-client
     accessModes:
       - ReadWriteOnce
   internal:
-    enabled: true
+    enabled: false
     hostpath:
       - name: hostpath
         path: /home/gwas/redis/data
         mountPath: /data
   network:
-    enabled: false
+    enabled: true
     nfs:
       - name: nfspgwas
         server: 192.168.10.3
