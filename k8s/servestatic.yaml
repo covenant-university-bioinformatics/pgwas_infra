@@ -56,13 +56,13 @@ spec:
           volumeMounts:
             - mountPath: /pv/analysis
               name: analysis-storage-volume
-          resources:
-            limits:
-              cpu: 300m
-              memory: 400Mi
-            requests:
-              cpu: 300m
-              memory: 400Mi
+#          resources:
+#            limits:
+#              cpu: 300m
+#              memory: 400Mi
+#            requests:
+#              cpu: 300m
+#              memory: 400Mi
       volumes:
         - name: analysis-storage-volume
           persistentVolumeClaim:
